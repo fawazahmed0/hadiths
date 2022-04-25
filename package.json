@@ -1,0 +1,21 @@
+{
+  "name": "hadiths",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fawazahmed0/hadiths.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fawazahmed0/hadiths/issues"
+  },
+  "homepage": "https://github.com/fawazahmed0/hadiths#readme",
+  "devDependencies": {
+    "parcel": "^2.5.0"
+  }
+}
