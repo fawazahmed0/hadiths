@@ -14,7 +14,6 @@
       async function test(){
         let response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions.json');
         let data = await response.json();
-        let str = ''
         let bigUL = getElement('ul',{class:'list-group'})
         let count=0
         for(let [key,value] of Object.entries(data)){
