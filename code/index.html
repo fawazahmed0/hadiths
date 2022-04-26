@@ -16,10 +16,14 @@
         let data = await response.json();
         let str = ''
         let bigUL = getElement('ul',{class:'list-group'})
+        let count=0
         for(let [key,value] of Object.entries(data)){
+           count++;
             let bigLI = getElement('li',{class:'list-group-item'})
-            bigLI.innerText = value.name
-            let ul = getElement('ul',{class:'list-group'})
+            let bigA = getElement('a',{href:`#collapse${count}`,'data-bs-toggle':'collapse',role:'button'})
+            bigA.innerText = value.name
+            bigLI.appendChild(bigA)
+            let ul = getElement('ul',{class:'list-group collapse',id:`collapse${count}`})
             for(let items of value.collection){
                 let li = getElement('li',{class:'list-group-item'})
                 let aElem = getElement('a',{href:items.link})
@@ -47,7 +51,6 @@
       test()
   </script>
   <body>
-    <h1>Hello, world!</h1>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
