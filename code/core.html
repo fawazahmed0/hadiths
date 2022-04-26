@@ -29,6 +29,10 @@
 
             let data = await response.json();
             let hadiths = data.hadiths
+            if(grade){
+              grade = grade.trim().toLowerCase()
+              hadiths = hadiths.filter(hadith => hadith.grades.some(e=>e.grade.toLowerCase().includes(grade)))
+            }
             for(let hadith of hadiths){
                 let arr = []
                 for(let [key,value] of Object.entries(hadith)){
