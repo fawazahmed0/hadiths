@@ -20,7 +20,7 @@
         let UL = getElement('ul',{class:'list-group'})
         for(let [key,value] of Object.entries(data[edition.replace(/\d+/g, '').split('-')[1].trim()]['metadata']['sections'])){
             let LI = getElement('li',{class:'list-group-item'})
-            let aElem = getElement('a',{href:`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions/${edition}/sections/${key}.json`})
+            let aElem = getElement('a',{href:`data.html?edition=${edition}&type=section&num=${key}`})
             aElem.innerText = `Section ${key} : ${value}`
             LI.appendChild(aElem)
             UL.appendChild(LI)
@@ -43,7 +43,7 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
