@@ -26,7 +26,10 @@
             let ul = getElement('ul',{class:'list-group collapse',id:`collapse${count}`})
             for(let items of value.collection){
                 let li = getElement('li',{class:'list-group-item'})
-                let aElem = getElement('a',{href:`sections.html?edition=${items.name}`})
+                let newparams = new URLSearchParams();
+                newparams.set('edition',items.name)
+                newparams.set('bareedition',key)
+                let aElem = getElement('a',{href:`sections.html?${newparams.toString()}`})
                 aElem.innerText = items.language
                 li.appendChild(aElem)
                 //items.language , items.link

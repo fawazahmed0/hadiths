@@ -12,15 +12,20 @@
             async function test(){
                 let params = new URLSearchParams(document.location.search);
                 let edition = params.get("edition");  
-                if(!edition)
+                let bareedition = params.get("bareedition"); 
+                if(!edition || !bareedition)
                  return          
                  let response = await fetch("https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/info.json");
         let data = await response.json();
         
         let UL = getElement('ul',{class:'list-group'})
-        for(let [key,value] of Object.entries(data[edition.replace(/\d+/g, '').split('-')[1].trim()]['metadata']['sections'])){
+        for(let [key,value] of Object.entries(data[bareedition]['metadata']['sections'])){
             let LI = getElement('li',{class:'list-group-item'})
-            let aElem = getElement('a',{href:`data.html?edition=${edition}&type=section&num=${key}`})
+            let newparams = new URLSearchParams();
+            newparams.set('edition',edition)
+            newparams.set('type','section')
+            newparams.set('num',key)
+            let aElem = getElement('a',{href:`data.html?${newparams.toString()}`})
             aElem.innerText = `Section ${key} : ${value}`
             LI.appendChild(aElem)
             UL.appendChild(LI)
