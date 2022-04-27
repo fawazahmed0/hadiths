@@ -11,11 +11,15 @@
     <script>
             async function test(){
                 let params = new URLSearchParams(document.location.search);
-                let edition = params.get("edition");  
-                if(!edition)
-                 return          
+                let pathArr = document.location.pathname.split('/')
+                let editions = await fetch("https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions.json").then(res=>res.json())
+                let editionsArr = Object.values(editions).map(e=>e.collection.map(e=>e.name)).flat()
+                let edition = editionsArr.filter(e=>pathArr.includes(e))
+                if(edition.length==0)
+                 return
+                edition = edition[0]          
                  let response = await fetch("https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/info.json");
-        let data = await response.json();
+                 let data = await response.json();
         
         let UL = getElement('ul',{class:'list-group'})
         for(let [key,value] of Object.entries(data[edition.replace(/\d+/g, '').split('-')[1].trim()]['metadata']['sections'])){
