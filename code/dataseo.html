@@ -14,7 +14,8 @@
     <script>
         async function test(){
           let params = new URLSearchParams(document.location.search);
-                let bareedition = params.get("bareedition");  
+                let edition = params.get("edition"); 
+                let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim() 
                 let num = params.get("num"); 
                 if(!bareedition || !num)
                  return

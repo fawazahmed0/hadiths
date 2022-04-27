@@ -11,8 +11,9 @@
     <script>
             async function test(){
                 let params = new URLSearchParams(document.location.search);
-                let bareedition = params.get("bareedition");  
-                if(!bareedition)
+                let edition = params.get("edition") 
+                let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
+                if(!edition)
                  return          
                  let response = await fetch("https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/info.json");
                  let data = await response.json();

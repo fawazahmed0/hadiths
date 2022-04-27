@@ -15,7 +15,7 @@
         async function test(){
             let params = new URLSearchParams(document.location.search);
             let edition = params.get("edition"); 
-            let bareedition = params.get("bareedition"); 
+            let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
             let type = params.get("type"); 
             let num = params.get("num"); 
             let grade = params.get("grade"); 
