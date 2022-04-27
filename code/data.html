@@ -15,6 +15,7 @@
         async function test(){
             let params = new URLSearchParams(document.location.search);
             let edition = params.get("edition"); 
+            let bareedition = params.get("bareedition"); 
             let type = params.get("type"); 
             let num = params.get("num"); 
             let grade = params.get("grade"); 
@@ -29,6 +30,10 @@
             return
 
             let data = await response.json();
+            let isocodes = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/isocodes/iso-codes.json').then(res=>res.json())
+            let editionsJSON = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions.json').then(res=>res.json())
+            let [_,lang, dirval] = editionsJSON[bareedition].collection.filter(e=>e.name==edition).map(e=>[e.name,e.language,e.direction])[0]
+            let lowerLang = lang.toLowerCase()
             let hadiths = data.hadiths
             if(grade){
               grade = grade.trim().toLowerCase()
@@ -36,13 +41,14 @@
             }
             hadiths = hadiths.filter(hadith => hadith?.text)
             for(let hadith of hadiths){
+
                 let arr = []
                 for(let [key,value] of Object.entries(hadith)){
                     if(value === Object(value))
                       value = JSON.stringify(value)
                     arr.push(`${key} : ${value}`)
                 }
-                let card = getElement('div', {class:'card'})
+                let card = getElement('div', {class:'card',dir:dirval,lang:isocodes[lowerLang].iso1?isocodes[lowerLang].iso1:isocodes[lowerLang].iso2})
                 let cardbody = getElement('div', {class:'card-body'})
                 cardbody.innerText = arr.join('\n')
                 card.appendChild(cardbody)
