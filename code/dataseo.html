@@ -24,7 +24,8 @@
             return
 
             let data = await response.json();
-            let edtionsLangArr = data[bareedition].collection.map(e=>[e.name,e.language])
+            let isocodes = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/isocodes/iso-codes.json').then(res=>res.json())
+            let edtionsLangArr = data[bareedition].collection.map(e=>[e.name,e.language,e.direction])
             for (let [editionName, lang] of edtionsLangArr){
               let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
               aElem.innerText = lang
@@ -32,7 +33,8 @@
               div.appendChild(aElem)
               document.body.appendChild(div)
             }
-            for (let [editionName, lang] of edtionsLangArr){
+            for (let [editionName, lang,dirval] of edtionsLangArr){
+              let lowerLang = lang.toLowerCase()
               let response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions/${editionName}/${num}.json`).catch(console.error)
               let data = await response.json();
               let div = getElement('div',{id:lang.toLowerCase()})
@@ -45,7 +47,7 @@
                       value = JSON.stringify(value)
                     arr.push(`${key} : ${value}`)
                 }
-                let card = getElement('div', {class:'card'})
+                let card = getElement('div', {class:'card',dir:dirval,lang:isocodes[lowerLang].iso1?isocodes[lowerLang].iso1:isocodes[lowerLang].iso2})
                 let cardbody = getElement('div', {class:'card-body'})
                 cardbody.innerText = arr.join('\n')
                 card.appendChild(cardbody)
