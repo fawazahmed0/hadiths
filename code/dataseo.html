@@ -27,16 +27,20 @@
 
             let isocodes = await getJSON ('isocodes/iso-codes',quranLinks)
             let edtionsLangArr = data[bareedition].collection.map(e=>[e.name,e.language,e.direction])
+            let linksArr = []
             for (let [editionName, lang] of edtionsLangArr){
               let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
               aElem.innerText = lang
               let div = getElement('div',{})
               div.appendChild(aElem)
               document.body.appendChild(div)
+              linksArr.push(`editions/${editionName}/${num}`)
             }
+            let dataArr = await getJSON(linksArr)
+            let count = 0
             for (let [editionName, lang,dirval] of edtionsLangArr){
               let lowerLang = lang.toLowerCase()
-              let data = await getJSON(`editions/${editionName}/${num}`)
+              let data = dataArr[count]
               let div = getElement('div',{id:lang.toLowerCase()})
               div.innerText = lang
               document.body.appendChild(div)
@@ -53,6 +57,7 @@
                 card.appendChild(cardbody)
                 document.body.appendChild(card)
               }
+              count++;
             }
             
  
