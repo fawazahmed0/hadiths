@@ -25,16 +25,16 @@
       if(!bareedition || !num)
         return
 
-      let data
+      let endpoint
       if (type == 'full')
-        data = await getJSON(`editions/${edition}`)
+      endpoint = `editions/${edition}`
       else if (type = 'section')
-        data = await getJSON(`editions/${edition}/sections/${num}`)
+      endpoint = `editions/${edition}/sections/${num}`
       else if (type = 'single')
-        data = await getJSON(`editions/${edition}/${num}`)
+      endpoint = `editions/${edition}/${num}`
 
       let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
-      let editionsJSON = await getJSON('editions')
+      let [editionsJSON ,data]= await getJSON(['editions',endpoint])
       let [_, lang, dirval] = editionsJSON[bareedition].collection.filter(e => e.name == edition).map(e => [e.name, e.language, e.direction])[0]
       let lowerLang = lang.toLowerCase()
       let hadiths = data.hadiths
