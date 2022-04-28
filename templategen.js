@@ -21,7 +21,7 @@ let metaheadignore = {'data.html':seoignore}
 
 for (let name of fileNames){
     let innercode = fs.readFileSync(path.join(templateDir,name)).toString()
-    var rendered = Mustache.render(defaultTemplate, { title: titles[name], footerclass: footerclassobj[name] , containercode:innercode, meta:{filename:name,head:metaheadignore[name]} });
+    var rendered = Mustache.render(defaultTemplate, { title: titles[name], footerclass: footerclassobj[name] , containercode:innercode, meta:{filename:name,barename:name.replace(/\.[^\.]*$/i,''),head:metaheadignore[name]} });
     fs.writeFileSync(path.join(codeDir,name), rendered)
 }
 // Copy all files like .js, folders etc to code directory
