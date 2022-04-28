@@ -21,11 +21,11 @@
       let num = params.get("num");
       if (!bareedition || !num)
         return
-      let data = await getJSON('editions')
+      let editionsJSON = await getJSON('editions')
 
 
       let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
-      let edtionsLangArr = data[bareedition].collection.map(e => [e.name, e.language, e.direction])
+      let edtionsLangArr = editionsJSON[bareedition].collection.map(e => [e.name, e.language, e.direction])
       let linksArr = []
       for (let [editionName, lang] of edtionsLangArr) {
         let aElem = getElement('a', { href: `#${lang.toLowerCase()}` })
