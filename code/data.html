@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Hello, world!</title>
-
+    <script src="commoncode.js"></script>
     <script>
         async function test(){
             let params = new URLSearchParams(document.location.search);
@@ -19,19 +19,17 @@
             let type = params.get("type"); 
             let num = params.get("num"); 
             let grade = params.get("grade"); 
-            let response;
-            if(type == 'full')
-             response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${edition}.json`).catch(console.error)
+            let data
+            if(type == 'full')  
+            [data] = await getJSON (`editions/${edition}`)
             else if(type = 'section')
-            response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${edition}/sections/${num}.json`).catch(console.error)
+            [data] = await getJSON (`editions/${edition}/sections/${num}`)
             else if(type = 'single')
-            response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${edition}/${num}.json`).catch(console.error)
-            if(!response)
+            [data] = await getJSON (`editions/${edition}/${num}`)
+            if(!data)
             return
-
-            let data = await response.json();
-            let isocodes = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/isocodes/iso-codes.json').then(res=>res.json())
-            let editionsJSON = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions.json').then(res=>res.json())
+            let[isocodes] = await getJSON ('isocodes/iso-codes',quranLinks)
+            let [editionsJSON] = await getJSON ('editions')
             let [_,lang, dirval] = editionsJSON[bareedition].collection.filter(e=>e.name==edition).map(e=>[e.name,e.language,e.direction])[0]
             let lowerLang = lang.toLowerCase()
             let hadiths = data.hadiths
@@ -57,13 +55,7 @@
 
         }
 
-        function getElement(elementName, attributesObj){
-        let element = document.createElement(elementName);
-        for(let [key,value] of Object.entries(attributesObj)){
-            element.setAttribute(key, value);
-        }
-        return element
-      }
+
 
         test()
 
