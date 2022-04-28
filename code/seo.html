@@ -13,7 +13,7 @@
   </head>
   <script src="commoncode.js"></script>
   <script>
-      async function test(){
+      async function ready(){
         let data = await getJSON('editions');
 
         let UL = getElement('ul',{class:'list-group'})
@@ -31,7 +31,7 @@
 
     
 
-      document.addEventListener("DOMContentLoaded", test);
+      document.addEventListener("DOMContentLoaded", ready);
   </script>
   <body>
 
