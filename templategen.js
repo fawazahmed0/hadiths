@@ -13,11 +13,11 @@ let fileNames = allFileNames.filter(e => !ignoreHTMLFiles.includes(e) && e.endsW
 
 let defaultTemplate = fs.readFileSync(path.join(templateDir, 'default.html')).toString()
 
-let titles = {'index.html':'Send Letters Online','send.html':'Send Letters Now','pricing.html':'Pricing','contact.html':'Contact','developers.html':'API','success.html':'Thank you','failed.html':'Failed','about.html':'About Us','refund.html':'Refund & Cancellation','terms.html':'Terms & Conditions'}
-let footerclassobj = {'send.html':'d-none'};
+let titles = {'index.html':'Hadiths Books','data.html':'Hadiths with multiple grades','dataseo.html':'Hadith with multiple grades & multiple languages','sections.html':'Hadith Sections','seo.html':'Hadith Books','single.html':'Single Hadith with multiple grades & multiple languages'}
+let footerclassobj = {}
 
 let seoignore = `<meta name="robots" content="noindex">`
-let metaheadignore = {'success.html':seoignore,'failed.html':seoignore}
+let metaheadignore = {'data.html':seoignore}
 
 for (let name of fileNames){
     let innercode = fs.readFileSync(path.join(templateDir,name)).toString()
