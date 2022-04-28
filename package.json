@@ -4,7 +4,10 @@
   "description": "",
   "scripts": {
     "serve": "parcel code/*.html --https",
-    "build": "parcel build code/*.html"
+    "templatebuild": "node templategen.js && watch \"node templategen.js\" ./template",
+    "start": "npm-run-all --parallel templatebuild serve",
+    "prebuild": "npx rimraf dist",
+    "build": "node templategen.js && parcel build code/*.html"
   },
   "browserslist": [
     "defaults"

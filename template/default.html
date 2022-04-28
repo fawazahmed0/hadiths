@@ -51,6 +51,7 @@
         // Register Service worker for Add to Home Screen option to work
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register(new URL('./service-worker.js', import.meta.url)) }
     </script>
+    <script defer src='commoncode.js'></script>
     <link rel="icon" type="image/svg+xml" href="icons/original-icon.svg">
     <link rel="manifest" href="manifest.webmanifest" />
     <!-- Bootstrap CSS -->
