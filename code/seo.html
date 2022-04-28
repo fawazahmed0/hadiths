@@ -13,8 +13,7 @@
   </head>
   <script>
       async function test(){
-        let response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions.json');
-        let data = await response.json();
+        let data = await getJSON('editions');
 
         let UL = getElement('ul',{class:'list-group'})
         for(let [key,value] of Object.entries(data)){

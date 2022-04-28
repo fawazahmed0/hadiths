@@ -19,13 +19,13 @@
                 let num = params.get("num"); 
                 if(!bareedition || !num)
                  return
-                 let response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions.json').catch(console.error)
+                 let data = await getJSON('editions')
 
-            if(!response)
+            if(!data)
             return
 
-            let data = await response.json();
-            let isocodes = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/isocodes/iso-codes.json').then(res=>res.json())
+
+            let isocodes = await getJSON ('isocodes/iso-codes',quranLinks)
             let edtionsLangArr = data[bareedition].collection.map(e=>[e.name,e.language,e.direction])
             for (let [editionName, lang] of edtionsLangArr){
               let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
@@ -36,8 +36,7 @@
             }
             for (let [editionName, lang,dirval] of edtionsLangArr){
               let lowerLang = lang.toLowerCase()
-              let response = await fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@latest/editions/${editionName}/${num}.json`).catch(console.error)
-              let data = await response.json();
+              let data = await getJSON(`editions/${editionName}/${num}`)
               let div = getElement('div',{id:lang.toLowerCase()})
               div.innerText = lang
               document.body.appendChild(div)
