@@ -1,4 +1,6 @@
 function getElement(elementName, attributesObj) {
+  if(!attributesObj)
+    attributesObj = {}
   let element = document.createElement(elementName);
   for (let [key, value] of Object.entries(attributesObj)) {
     element.setAttribute(key, value);

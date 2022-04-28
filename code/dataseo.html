@@ -23,9 +23,6 @@
         return
       let data = await getJSON('editions')
 
-      if (!data)
-        return
-
 
       let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
       let edtionsLangArr = data[bareedition].collection.map(e => [e.name, e.language, e.direction])
@@ -33,7 +30,7 @@
       for (let [editionName, lang] of edtionsLangArr) {
         let aElem = getElement('a', { href: `#${lang.toLowerCase()}` })
         aElem.innerText = lang
-        let div = getElement('div', {})
+        let div = getElement('div')
         div.appendChild(aElem)
         document.body.appendChild(div)
         linksArr.push(`editions/${editionName}/${num}`)

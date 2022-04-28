@@ -18,9 +18,13 @@
       let params = new URLSearchParams(document.location.search);
       let edition = params.get("edition");
       let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
-      let type = params.get("type");
+      let type = params.get("type") || 'section'
       let num = params.get("num");
       let grade = params.get("grade");
+
+      if(!bareedition || !num)
+        return
+
       let data
       if (type == 'full')
         data = await getJSON(`editions/${edition}`)
@@ -28,8 +32,7 @@
         data = await getJSON(`editions/${edition}/sections/${num}`)
       else if (type = 'single')
         data = await getJSON(`editions/${edition}/${num}`)
-      if (!data)
-        return
+
       let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
       let editionsJSON = await getJSON('editions')
       let [_, lang, dirval] = editionsJSON[bareedition].collection.filter(e => e.name == edition).map(e => [e.name, e.language, e.direction])[0]
