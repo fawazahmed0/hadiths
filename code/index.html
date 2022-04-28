@@ -11,6 +11,7 @@
 
     <title>Hello, world!</title>
   </head>
+  <script src="commoncode.js"></script>
   <script>
       async function test(){
         let data = await getJSON('editions');
@@ -43,13 +44,7 @@
 
     
 
-      function getElement(elementName, attributesObj){
-        let element = document.createElement(elementName);
-        for(let [key,value] of Object.entries(attributesObj)){
-            element.setAttribute(key, value);
-        }
-        return element
-      }
+
       test()
   </script>
   <body>
