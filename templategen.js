@@ -1,6 +1,6 @@
 const path = require('path')
 const Mustache = require('mustache');
-const fs = require('fs')
+const fs = require('fs-extra');
 let templateDir = path.join(__dirname,'template')
 let codeDir = path.join(__dirname,'code')
 fs.mkdirSync(codeDir, {
