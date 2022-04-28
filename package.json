@@ -6,6 +6,9 @@
     "serve": "parcel code/*.html --https",
     "build": "parcel build code/*.html"
   },
+  "browserslist": [
+    "defaults"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fawazahmed0/hadiths.git"
