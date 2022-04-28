@@ -15,7 +15,7 @@
                 let bareedition = params.get("bareedition") ||  edition.replace(/\d+/g, '').split('-')[1].trim()
                 if(!edition)
                  return          
-                 let [data] = await getJSON ('info')
+                 let data = await getJSON ('info')
         
         let UL = getElement('ul',{class:'list-group'})
         for(let [key,value] of Object.entries(data[bareedition]['metadata']['sections'])){

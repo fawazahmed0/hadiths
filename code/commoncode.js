@@ -15,9 +15,12 @@ function getElement(elementName, attributesObj){
 async function getJSON (endpoints,links) {
     if(!Array.isArray(endpoints))
     endpoints = [endpoints]
-    return await Promise.all(
+    let result = await Promise.all(
       endpoints.map(endpoint => fetchWithFallback(getURLs(endpoint,links)).then(response => response.json()))
     ).catch(console.error)
+    if(result.length==1)
+      return result[0]
+    return result
   }
   
 

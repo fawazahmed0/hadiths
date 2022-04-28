@@ -21,15 +21,15 @@
             let grade = params.get("grade"); 
             let data
             if(type == 'full')  
-            [data] = await getJSON (`editions/${edition}`)
+            data = await getJSON (`editions/${edition}`)
             else if(type = 'section')
-            [data] = await getJSON (`editions/${edition}/sections/${num}`)
+            data = await getJSON (`editions/${edition}/sections/${num}`)
             else if(type = 'single')
-            [data] = await getJSON (`editions/${edition}/${num}`)
+          data = await getJSON (`editions/${edition}/${num}`)
             if(!data)
             return
-            let[isocodes] = await getJSON ('isocodes/iso-codes',quranLinks)
-            let [editionsJSON] = await getJSON ('editions')
+            let isocodes = await getJSON ('isocodes/iso-codes',quranLinks)
+            let editionsJSON = await getJSON ('editions')
             let [_,lang, dirval] = editionsJSON[bareedition].collection.filter(e=>e.name==edition).map(e=>[e.name,e.language,e.direction])[0]
             let lowerLang = lang.toLowerCase()
             let hadiths = data.hadiths
