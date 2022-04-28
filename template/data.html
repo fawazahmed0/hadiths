@@ -40,7 +40,7 @@
       let cardbody = getElement('div', { class: 'card-body' })
       cardbody.innerText = arr.join('\n')
       card.appendChild(cardbody)
-      document.body.appendChild(card)
+      document.querySelector('#mycontainer').appendChild(card)
     }
 
   }

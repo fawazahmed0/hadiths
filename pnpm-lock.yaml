@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@parcel/core': ^2.5.0
+  '@parcel/packager-raw-url': ^2.5.0
   fs-extra: ^10.1.0
   mustache: ^4.2.0
   npm-run-all: ^4.1.5
@@ -14,6 +16,8 @@ dependencies:
   watch: 1.0.2
 
 devDependencies:
+  '@parcel/core': 2.5.0
+  '@parcel/packager-raw-url': 2.5.0_@parcel+core@2.5.0
   parcel: 2.5.0
 
 packages:
@@ -479,6 +483,16 @@ packages:
       - '@parcel/core'
     dev: true
 
+  /@parcel/packager-raw-url/2.5.0_@parcel+core@2.5.0:
+    resolution: {integrity: sha512-NIdmuuivotlIFTG8NU6SwR39wkDqzBSnEHjiLopZuj0bRY2PPnEeIHK0aoNayo8UOJOSthflwFKFW4goAb1S/w==}
+    engines: {node: '>= 12.0.0', parcel: ^2.5.0}
+    dependencies:
+      '@parcel/plugin': 2.5.0_@parcel+core@2.5.0
+      '@parcel/utils': 2.5.0
+    transitivePeerDependencies:
+      - '@parcel/core'
+    dev: true
+
   /@parcel/packager-raw/2.5.0_@parcel+core@2.5.0:
     resolution: {integrity: sha512-aHV0oogeiqxhxS1lsttw15EvG3DDWK3FV7+F+7hoaAy+xg89K56NTp6j43Jtw9iyU1/HnZRGBE2hF3C7N73oKw==}
     engines: {node: '>= 12.0.0', parcel: ^2.5.0}
@@ -748,18 +762,6 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/types/2.5.0:
-    resolution: {integrity: sha512-bA0fhG6aXSGYEVo5Dt96x6lseUQHeVZVzgmiRdZsvb614Gvx22ItfaKhPmAVbM9vzbObZDHl9l9G2Ovw8Xve4g==}
-    dependencies:
-      '@parcel/cache': 2.5.0_@parcel+core@2.5.0
-      '@parcel/diagnostic': 2.5.0
-      '@parcel/fs': 2.5.0_@parcel+core@2.5.0
-      '@parcel/package-manager': 2.5.0_@parcel+core@2.5.0
-      '@parcel/source-map': 2.0.2
-      '@parcel/workers': 2.5.0_@parcel+core@2.5.0
-      utility-types: 3.10.0
-    dev: true
-
   /@parcel/types/2.5.0_@parcel+core@2.5.0:
     resolution: {integrity: sha512-bA0fhG6aXSGYEVo5Dt96x6lseUQHeVZVzgmiRdZsvb614Gvx22ItfaKhPmAVbM9vzbObZDHl9l9G2Ovw8Xve4g==}
     dependencies:
@@ -805,7 +807,7 @@ packages:
       '@parcel/core': 2.5.0
       '@parcel/diagnostic': 2.5.0
       '@parcel/logger': 2.5.0
-      '@parcel/types': 2.5.0
+      '@parcel/types': 2.5.0_@parcel+core@2.5.0
       '@parcel/utils': 2.5.0
       chrome-trace-event: 1.0.3
       nullthrows: 1.1.1

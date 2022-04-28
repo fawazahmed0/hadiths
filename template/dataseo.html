@@ -17,7 +17,7 @@
       aElem.innerText = lang
       let div = getElement('div')
       div.appendChild(aElem)
-      document.body.appendChild(div)
+      document.querySelector('#mycontainer').appendChild(div)
       linksArr.push(`editions/${editionName}/${num}`)
     }
     let dataArr = await getJSON(linksArr)
@@ -27,7 +27,7 @@
       let data = dataArr[count]
       let div = getElement('div', { id: lang.toLowerCase() })
       div.innerText = lang
-      document.body.appendChild(div)
+      document.querySelector('#mycontainer').appendChild(div)
       for (let hadith of data.hadiths) {
         let arr = []
         for (let [key, value] of Object.entries(hadith)) {
@@ -39,7 +39,7 @@
         let cardbody = getElement('div', { class: 'card-body' })
         cardbody.innerText = arr.join('\n')
         card.appendChild(cardbody)
-        document.body.appendChild(card)
+        document.querySelector('#mycontainer').appendChild(card)
       }
       count++;
     }
