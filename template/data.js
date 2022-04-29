@@ -31,18 +31,27 @@ async function ready() {
 
     let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
     cardElem.querySelector('.card-text').innerText = hadith.text
-    if(hadith.grades.length>0)
-    cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+    let footerDiv = getElement('div',{class:"card-footer"})
+    if(hadith.grades.length>0){
+      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+    }
+    
     for (let grade of hadith.grades) 
       cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
-      if(hadith.hadithnumber)
-      cardElem.querySelectorAll('.card-footer')[1].insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
-      if(hadith.arabicnumber)
-      cardElem.querySelectorAll('.card-footer')[2].insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
+      if(hadith.hadithnumber){
+        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
+      }
+      if(hadith.arabicnumber){
+        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
+      }
 
-      if(hadith.reference)
-      cardElem.querySelectorAll('.card-footer')[3].insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
-
+      if(hadith.reference){
+        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
+      }
       cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
       cardElem.querySelector('a').setAttribute('href','#hadith'+hadith.hadithnumber)
 

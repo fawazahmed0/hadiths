@@ -5,10 +5,8 @@ let htmlHadithContainer =
 <div class="card-text lead m-1"></div>
 </div>
 
-<div class="card-footer"></div>
-<div class="card-footer"></div>
-<div class="card-footer"></div>
-<div class="card-footer"></div>
+<span id="footercontainer">
+</span>
 
 <a href="" class="stretched-link"></a>
 </div>
