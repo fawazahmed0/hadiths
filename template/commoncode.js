@@ -1,3 +1,25 @@
+let htmlHadithContainer = 
+`    
+<div class="card text-dark bg-light m-5">
+<div class="card-body">
+<h6 class="card-text m-1"></h6>
+</div>
+
+<div class="card-footer"></div>
+<div class="card-footer"></div>
+<div class="card-footer"></div>
+<div class="card-footer"></div>
+
+<a href="" class="stretched-link"></a>
+</div>
+`
+
+function capitalize(words){
+return words.toString().toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, match => match.toUpperCase()).trim()
+}
+
+let htmlparser = new DOMParser();
+
 function getElement(elementName, attributesObj) {
   if(!attributesObj)
     attributesObj = {}
@@ -43,3 +65,8 @@ function getURLs(endpoint, links) {
   links = links || apiLinks
   return extensions.map(ext => links.map(e => e + endpoint + ext)).flat()
 }
+
+function getElementFromHTML(htmlString){
+  return htmlparser.parseFromString(htmlString, "text/html");
+}
+

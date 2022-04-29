@@ -29,17 +29,27 @@ async function ready() {
   hadiths = hadiths.filter(hadith => hadith?.text)
   for (let hadith of hadiths) {
 
-    let arr = []
-    for (let [key, value] of Object.entries(hadith)) {
-      if (value === Object(value))
-        value = JSON.stringify(value)
-      arr.push(`${key} : ${value}`)
-    }
-    let card = getElement('div', { class: 'card', dir: dirval, lang: isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2 })
-    let cardbody = getElement('div', { class: 'card-body' })
-    cardbody.innerText = arr.join('\n')
-    card.appendChild(cardbody)
-    document.querySelector('#mycontainer').appendChild(card)
+    let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
+    cardElem.querySelector('.card-text').innerText = hadith.text
+    if(hadith.grades.length>0)
+    cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+    for (let grade of hadith.grades) 
+      cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
+      if(hadith.hadithnumber)
+      cardElem.querySelectorAll('.card-footer')[1].insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
+      if(hadith.arabicnumber)
+      cardElem.querySelectorAll('.card-footer')[2].insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
+
+      if(hadith.reference)
+      cardElem.querySelectorAll('.card-footer')[3].insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
+
+      cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
+      cardElem.querySelector('a').setAttribute('href','#hadith'+hadith.hadithnumber)
+
+      cardElem.setAttribute('dir',dirval)
+      cardElem.setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
+
+   document.querySelector('#mycontainer').appendChild(cardElem)
   }
 
 }
