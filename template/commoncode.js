@@ -2,7 +2,7 @@ let htmlHadithContainer =
 `    
 <div class="card text-dark bg-light m-5">
 <div class="card-body">
-<h6 class="card-text m-1"></h6>
+<div class="card-text lead m-1"></div>
 </div>
 
 <div class="card-footer"></div>
@@ -12,6 +12,15 @@ let htmlHadithContainer =
 
 <a href="" class="stretched-link"></a>
 </div>
+`
+
+let tableContainer = 
+`
+<table class="table table-hover  table-striped">
+  <tbody>
+
+  </tbody>
+</table>
 `
 
 function capitalize(words){
