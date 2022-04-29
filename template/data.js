@@ -6,7 +6,7 @@ async function ready() {
   let num = params.get("num");
   let grade = params.get("grade");
 
-  if(!bareedition || !num)
+  if(!bareedition || (!num && type!='full'))
     return
 
   let endpoint
