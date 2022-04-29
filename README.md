@@ -32,7 +32,7 @@ https://fawazahmed0.github.io/hadiths/data.html?edition=eng-abudawud&type=sectio
 To view 1000th Hadith of Abu dawud Arabic edition:
 https://fawazahmed0.github.io/hadiths/data.html?edition=ara-abudawud&type=single&num=1000
 
-To view all sahih hadiths of Ibn Majah English edition:
+To view all sahih hadiths in Ibn Majah English edition:
 https://fawazahmed0.github.io/hadiths/data.html?edition=eng-ibnmajah&type=full&grade=sahih
 
 
