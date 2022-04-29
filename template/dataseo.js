@@ -31,7 +31,7 @@
     for (let [editionName, lang, dirval] of edtionsLangArr) {
       let data = dataArr[count]
       let h2 = getElement('h2', { id: lang.toLowerCase(),'class':'text-center' })
-      let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
+      let aElem = getElement('a',{href:`#${lang.toLowerCase()}`, class:"link-dark"})
       aElem.innerText = lang
       h2.appendChild(aElem)
       document.querySelector('#mycontainer').appendChild(h2)
