@@ -20,48 +20,20 @@ async function ready() {
   let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
   let [editionsJSON ,data]= await getJSON(['editions',endpoint])
   let [_, lang, dirval] = editionsJSON[bareedition].collection.filter(e => e.name == edition).map(e => [e.name, e.language, e.direction])[0]
-  let lowerLang = lang.toLowerCase()
+  
   let hadiths = data.hadiths
   if (grade) {
     grade = grade.trim().toLowerCase()
     hadiths = hadiths.filter(hadith => hadith.grades.some(e => e.grade.toLowerCase().includes(grade)))
   }
   hadiths = hadiths.filter(hadith => hadith?.text)
-  for (let hadith of hadiths) {
-
-    let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
-    cardElem.querySelector('.card-text').innerText = hadith.text
-    let footerDiv = getElement('div',{class:"card-footer"})
-    if(hadith.grades.length>0){
-      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
-    }
-    
-    for (let grade of hadith.grades) 
-      cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
-      if(hadith.hadithnumber){
-        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
-      }
-      if(hadith.arabicnumber){
-        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
-      }
-
-      if(hadith.reference){
-        cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-      Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
-      }
-      cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
-      cardElem.querySelector('a').setAttribute('href','#hadith'+hadith.hadithnumber)
-
-      cardElem.setAttribute('dir',dirval)
-      cardElem.setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
-
-   document.querySelector('#mycontainer').appendChild(cardElem)
-  }
+  for (let hadith of hadiths) 
+    document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith,dirval,lang,isocodes))
+ 
+  
 
 }
+
 
 
 

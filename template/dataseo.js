@@ -29,35 +29,15 @@
     let dataArr = await getJSON(linksArr)
     let count = 0
     for (let [editionName, lang, dirval] of edtionsLangArr) {
-      let lowerLang = lang.toLowerCase()
       let data = dataArr[count]
       let h2 = getElement('h2', { id: lang.toLowerCase(),'class':'text-center' })
       let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
       aElem.innerText = lang
       h2.appendChild(aElem)
       document.querySelector('#mycontainer').appendChild(h2)
-      for (let hadith of data.hadiths) {
-
-        let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
-        cardElem.querySelector('.card-text').innerText = hadith.text
-        if(hadith.grades.length>0)
-        cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
-        for (let grade of hadith.grades) 
-          cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
-          if(hadith.hadithnumber)
-          cardElem.querySelectorAll('.card-footer')[1].insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
-          if(hadith.arabicnumber)
-          cardElem.querySelectorAll('.card-footer')[2].insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
-    
-          if(hadith.reference)
-          cardElem.querySelectorAll('.card-footer')[3].insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
-    
-    
-          cardElem.setAttribute('dir',dirval)
-          cardElem.setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
-    
-       document.querySelector('#mycontainer').appendChild(cardElem)
-      }
+      for (let hadith of data.hadiths) 
+      document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith,dirval,lang,isocodes))
+      
       count++;
     }
 

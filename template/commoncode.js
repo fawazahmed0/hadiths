@@ -77,3 +77,37 @@ function getElementFromHTML(htmlString){
   return htmlparser.parseFromString(htmlString, "text/html");
 }
 
+// pass hadith object & get card element with all hadith info in it
+function getHadithCardElem(hadith,dirval,lang,isocodes){
+  let lowerLang = lang.toLowerCase()
+  let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
+  cardElem.querySelector('.card-text').innerText = hadith.text
+  let footerDiv = getElement('div',{class:"card-footer"})
+  if(hadith.grades.length>0){
+    cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+  Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+  }
+  
+  for (let grade of hadith.grades) 
+    cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
+    if(hadith.hadithnumber){
+      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Hadith Number: ${hadith.hadithnumber}<br>`);
+    }
+    if(hadith.arabicnumber){
+      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Arabic Number: ${hadith.arabicnumber}<br>`);
+    }
+
+    if(hadith.reference){
+      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}<br>`);
+    }
+    cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
+    cardElem.querySelector('a').setAttribute('href','#hadith'+hadith.hadithnumber)
+
+    cardElem.setAttribute('dir',dirval)
+    cardElem.setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
+
+return cardElem
+}
