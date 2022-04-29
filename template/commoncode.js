@@ -106,8 +106,8 @@ function getHadithCardElem(hadith,dirval,lang,isocodes){
     cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
     cardElem.querySelector('a').setAttribute('href','#hadith'+hadith.hadithnumber)
 
-    cardElem.setAttribute('dir',dirval)
-    cardElem.setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
+    cardElem.querySelector('.card-text').setAttribute('dir',dirval)
+    cardElem.querySelector('.card-text').setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
 
 return cardElem
 }
