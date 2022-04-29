@@ -32,7 +32,9 @@
       let lowerLang = lang.toLowerCase()
       let data = dataArr[count]
       let h2 = getElement('h2', { id: lang.toLowerCase(),'class':'text-center' })
-      h2.innerText = lang
+      let aElem = getElement('a',{href:`#${lang.toLowerCase()}`})
+      aElem.innerText = lang
+      h2.appendChild(aElem)
       document.querySelector('#mycontainer').appendChild(h2)
       for (let hadith of data.hadiths) {
 
