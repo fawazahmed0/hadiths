@@ -22,6 +22,7 @@ const tableContainer =
 
 const searchBar = 
 `
+<div class="mb-3">
 <form class="d-flex" onsubmit="beginSearch(); return false">
   <input id="searchquery" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" />
   <button id="searchbtn" class="btn btn-outline-info" type="button" onclick="beginSearch(); return false">
@@ -34,6 +35,7 @@ const searchBar =
     </svg>
   </button>
 </form>
+</div>
 `
 
 function capitalize(words){

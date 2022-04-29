@@ -1,5 +1,6 @@
 
   async function ready() {
+    document.querySelector('#mycontainer').insertAdjacentHTML('beforeend',searchBar)
     let params = new URLSearchParams(document.location.search);
     let edition = params.get("edition");
     let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
