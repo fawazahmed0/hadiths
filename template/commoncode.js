@@ -36,8 +36,8 @@ function getElement(elementName, attributesObj) {
   return element
 }
 
-let apiLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/", "https://gitcdn.link/cdn/fawazahmed0/hadith-api/1/", "https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/"]
-let quranLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/", "https://gitcdn.link/cdn/fawazahmed0/quran-api/1/", "https://raw.githubusercontent.com/fawazahmed0/quran-api/1/"]
+let apiLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/", "https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/"]
+let quranLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/", "https://raw.githubusercontent.com/fawazahmed0/quran-api/1/"]
 let extensions = [".min.json", ".json"]
 
 // https://www.shawntabrizi.com/code/programmatically-fetch-multiple-apis-parallel-using-async-await-javascript/
