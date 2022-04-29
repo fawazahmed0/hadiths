@@ -1,4 +1,5 @@
 async function ready() {
+  document.querySelector('#mycontainer').insertAdjacentHTML('beforeend',searchBar)
   let params = new URLSearchParams(document.location.search);
   let edition = params.get("edition");
   let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
@@ -38,9 +39,3 @@ async function ready() {
 
 
 document.addEventListener("DOMContentLoaded", ready);
-window.beginSearch = function () {
-  let newparams = new URLSearchParams();
-  let searchquery = document.getElementById('searchquery').value
-  newparams.set('q', `site:fawazahmed0.github.io/hadiths ${searchquery}`)
-  window.open('https://www.google.com/search?' + newparams.toString(), '_blank');
-}
