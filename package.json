@@ -6,8 +6,8 @@
     "serve": "parcel code/*.html --https",
     "templatebuild": "node templategen.js && watch \"node templategen.js\" ./template",
     "start": "npx rimraf code && npm-run-all --parallel templatebuild serve",
-    "prebuild": "npx rimraf code && npx rimraf dist",
-    "build": "node templategen.js && parcel build code/*.html"
+    "prebuild": "npx rimraf code docs",
+    "build": "node templategen.js && parcel build code/*.html --dist-dir docs --public-url ./"
   },
   "browserslist": [
     "defaults"
