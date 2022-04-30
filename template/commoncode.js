@@ -61,12 +61,15 @@ let extensions = [".min.json", ".json"]
 // https://www.shawntabrizi.com/code/programmatically-fetch-multiple-apis-parallel-using-async-await-javascript/
 // Get links async i.e in parallel
 async function getJSON(endpoints, links) {
-  if (!Array.isArray(endpoints))
+  let returnSingle = false
+  if (!Array.isArray(endpoints)){
     endpoints = [endpoints]
+    returnSingle = true
+  }
   let result = await Promise.all(
     endpoints.map(endpoint => fetchWithFallback(getURLs(endpoint, links)).then(response => response.json()))
   ).catch(console.error)
-  if (result.length == 1)
+  if (returnSingle)
     return result[0]
   return result
 }
@@ -95,7 +98,7 @@ function getElementFromHTML(htmlString){
 }
 
 // pass hadith object & get card element with all hadith info in it
-function getHadithCardElem(hadith,dirval,lang,isocodes){
+function getHadithCardElem(hadith,editionName,dirval,lang,isocodes){
   let lowerLang = lang.toLowerCase()
   let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
   cardElem.querySelector('.card-text').innerText = hadith.text
@@ -107,20 +110,21 @@ function getHadithCardElem(hadith,dirval,lang,isocodes){
   
   for (let grade of hadith.grades) 
     cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
+    let hrefVal = `hadith:${editionName}:${hadith.hadithnumber}`
     if(hadith.hadithnumber){
       cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#hadith${hadith.hadithnumber} class="link-dark text-decoration-none" >Hadith Number: ${hadith.hadithnumber}</a><br>`);
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Hadith Number: ${hadith.hadithnumber}</a><br>`);
     }
     if(hadith.arabicnumber){
       cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#hadith${hadith.hadithnumber} class="link-dark text-decoration-none" >Arabic Number: ${hadith.arabicnumber}</a><br>`);
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Arabic Number: ${hadith.arabicnumber}</a><br>`);
     }
 
     if(hadith.reference){
       cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#hadith${hadith.hadithnumber} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}</a><br>`);
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}</a><br>`);
     }
-    cardElem.setAttribute('id','hadith'+hadith.hadithnumber)
+    cardElem.setAttribute('id',`hadith${hadith.hadithnumber}`)
 
     cardElem.querySelector('.card-text').setAttribute('dir',dirval)
     cardElem.querySelector('.card-text').setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)

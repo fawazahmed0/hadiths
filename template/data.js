@@ -29,7 +29,7 @@ async function ready() {
   }
   hadiths = hadiths.filter(hadith => hadith?.text)
   for (let hadith of hadiths) 
-    document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith,dirval,lang,isocodes))
+    document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith,edition,dirval,lang,isocodes))
  
   
 
