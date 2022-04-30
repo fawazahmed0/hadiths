@@ -105,11 +105,20 @@ function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
   let footerDiv = getElement('div', { class: "card-footer" })
   if (hadith.grades.length > 0) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<table class="table table-sm">
+    <thead>
+      <tr>
+        <th>Grade</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table>`);
   }
 
   for (let grade of hadith.grades)
-    cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
+    cardElem.querySelector('tbody').insertAdjacentHTML("beforeend", `<tr><td>${capitalize(grade.grade)}</td><td>${grade.name}</td></tr>`);
   let hrefVal = `hadith:${editionName}:${hadith.hadithnumber}`
   if (hadith.hadithnumber) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
