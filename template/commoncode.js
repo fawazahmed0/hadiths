@@ -124,7 +124,7 @@ function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e => capitalize(e)).join(' ')}</a><br>`);
   }
-  cardElem.setAttribute('id', `hadith${hadith.hadithnumber}`)
+  cardElem.setAttribute('id', hrefVal)
 
   cardElem.querySelector('.card-text').setAttribute('dir', dirval)
   cardElem.querySelector('.card-text').setAttribute('lang', isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
