@@ -1,5 +1,5 @@
-const htmlHadithContainer = 
-`    
+const htmlHadithContainer =
+  `    
 <div class="card text-dark bg-light m-5">
 <div class="card-body">
 <div class="card-text lead m-1"></div>
@@ -11,8 +11,8 @@ const htmlHadithContainer =
 </div>
 `
 
-const tableContainer = 
-`
+const tableContainer =
+  `
 <table class="table table-hover  table-striped">
   <tbody>
 
@@ -20,8 +20,8 @@ const tableContainer =
 </table>
 `
 
-const searchBar = 
-`
+const searchBar =
+  `
 <div class="mb-3 d-none">
 <form class="d-flex" onsubmit="beginSearch(); return false">
   <input id="searchquery" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" />
@@ -38,14 +38,14 @@ const searchBar =
 </div>
 `
 
-function capitalize(words){
-return words.toString().toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, match => match.toUpperCase()).trim()
+function capitalize(words) {
+  return words.toString().toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, match => match.toUpperCase()).trim()
 }
 
 let htmlparser = new DOMParser();
 
 function getElement(elementName, attributesObj) {
-  if(!attributesObj)
+  if (!attributesObj)
     attributesObj = {}
   let element = document.createElement(elementName);
   for (let [key, value] of Object.entries(attributesObj)) {
@@ -62,7 +62,7 @@ let extensions = [".min.json", ".json"]
 // Get links async i.e in parallel
 async function getJSON(endpoints, links) {
   let returnSingle = false
-  if (!Array.isArray(endpoints)){
+  if (!Array.isArray(endpoints)) {
     endpoints = [endpoints]
     returnSingle = true
   }
@@ -93,43 +93,43 @@ function getURLs(endpoint, links) {
   return extensions.map(ext => links.map(e => e + endpoint + ext)).flat()
 }
 
-function getElementFromHTML(htmlString){
+function getElementFromHTML(htmlString) {
   return htmlparser.parseFromString(htmlString, "text/html");
 }
 
 // pass hadith object & get card element with all hadith info in it
-function getHadithCardElem(hadith,editionName,dirval,lang,isocodes){
+function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
   let lowerLang = lang.toLowerCase()
   let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
   cardElem.querySelector('.card-text').innerText = hadith.text
-  let footerDiv = getElement('div',{class:"card-footer"})
-  if(hadith.grades.length>0){
+  let footerDiv = getElement('div', { class: "card-footer" })
+  if (hadith.grades.length > 0) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-  Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<b>Grades:</b><br>`);
   }
-  
-  for (let grade of hadith.grades) 
+
+  for (let grade of hadith.grades)
     cardElem.querySelector('.card-footer').insertAdjacentHTML("beforeend", `<b>${capitalize(grade.grade)}</b> : ${grade.name}<br>`);
-    let hrefVal = `hadith:${editionName}:${hadith.hadithnumber}`
-    if(hadith.hadithnumber){
-      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+  let hrefVal = `hadith:${editionName}:${hadith.hadithnumber}`
+  if (hadith.hadithnumber) {
+    cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Hadith Number: ${hadith.hadithnumber}</a><br>`);
-    }
-    if(hadith.arabicnumber){
-      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+  }
+  if (hadith.arabicnumber) {
+    cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Arabic Number: ${hadith.arabicnumber}</a><br>`);
-    }
+  }
 
-    if(hadith.reference){
-      cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
-    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e=>capitalize(e)).join(' ')}</a><br>`);
-    }
-    cardElem.setAttribute('id',`hadith${hadith.hadithnumber}`)
+  if (hadith.reference) {
+    cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
+    Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e => capitalize(e)).join(' ')}</a><br>`);
+  }
+  cardElem.setAttribute('id', `hadith${hadith.hadithnumber}`)
 
-    cardElem.querySelector('.card-text').setAttribute('dir',dirval)
-    cardElem.querySelector('.card-text').setAttribute('lang',isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
+  cardElem.querySelector('.card-text').setAttribute('dir', dirval)
+  cardElem.querySelector('.card-text').setAttribute('lang', isocodes[lowerLang].iso1 ? isocodes[lowerLang].iso1 : isocodes[lowerLang].iso2)
 
-return cardElem
+  return cardElem
 }
 
 window.beginSearch = function () {
