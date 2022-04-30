@@ -147,3 +147,7 @@ window.beginSearch = function () {
   newparams.set('q', `site:fawazahmed0.github.io/hadiths ${searchquery}`)
   window.open('https://www.google.com/search?' + newparams.toString(), '_blank');
 }
+
+function isObject(obj) {
+  return obj === Object(obj);
+}

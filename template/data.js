@@ -13,9 +13,9 @@ async function ready() {
   let endpoint
   if (type == 'full')
     endpoint = `editions/${edition}`
-  else if (type = 'section')
+  else if (type == 'section')
     endpoint = `editions/${edition}/sections/${num}`
-  else if (type = 'single')
+  else if (type == 'single')
     endpoint = `editions/${edition}/${num}`
 
   let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
@@ -26,6 +26,10 @@ async function ready() {
   if (grade) {
     grade = grade.trim().toLowerCase()
     hadiths = hadiths.filter(hadith => hadith.grades.some(e => e.grade.toLowerCase().includes(grade)))
+  }
+  if(type=='section' && isObject(data?.metadata?.section)){ 
+   let [numVal,sectionVal] = Object.entries(data.metadata.section).flat()
+    document.querySelector('#mycontainer').insertAdjacentHTML('beforeend', `<h2 class="text-center">Section ${numVal}: ${sectionVal}</h2>`)
   }
   hadiths = hadiths.filter(hadith => hadith?.text)
   for (let hadith of hadiths)
