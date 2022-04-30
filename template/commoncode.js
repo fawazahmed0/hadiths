@@ -1,6 +1,6 @@
 const htmlHadithContainer =
   `    
-<div class="card text-dark bg-light m-5">
+<div class="card text-dark bg-light m-3">
 <div class="card-body">
 <div class="card-text lead m-1"></div>
 </div>
