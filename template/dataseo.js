@@ -27,7 +27,7 @@ async function ready() {
   }
   // Create endpoints for parallel fetch
   for (let [editionName] of edtionsLangArr)
-    linksArr.push(`editions/${editionName}/${chapter}/${verse}`)
+    linksArr.push(`editions/${editionName}/${num}`)
 
   document.querySelector('#mycontainer').appendChild(tableElem)
   let dataArr = await getJSON(linksArr)
