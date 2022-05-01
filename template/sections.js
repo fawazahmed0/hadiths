@@ -18,11 +18,6 @@ async function ready() {
     LI.appendChild(aElem)
     UL.appendChild(LI)
   }
-  let LI = getElement('li', { class: 'list-group-item' })
-  let aElem = getElement('a', { href: `seo.html` })
-  aElem.innerText = `Get Single Hadith with Multiple Languages`
-  LI.appendChild(aElem)
-  UL.appendChild(LI)
   document.querySelector('#mycontainer').appendChild(UL)
 }
 
