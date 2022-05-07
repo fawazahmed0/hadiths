@@ -10,6 +10,8 @@ async function ready() {
   if (!bareedition || (!num && type != 'full'))
     return
 
+  showSpinningWheel('#mycontainer','beforeend')
+
   let endpoint
   if (type == 'full')
     endpoint = `editions/${edition}`
@@ -35,7 +37,7 @@ async function ready() {
   for (let hadith of hadiths)
     document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith, edition, dirval, lang, isocodes))
 
-
+removeSpinningWheel()
 
 }
 

@@ -1,4 +1,5 @@
 async function ready() {
+  showSpinningWheel('#mycontainer','beforeend')
   let data = await getJSON('editions');
 
   let UL = getElement('ul', { class: 'list-group' })
@@ -11,6 +12,7 @@ async function ready() {
     LI.appendChild(aElem)
     UL.appendChild(LI)
   }
+  removeSpinningWheel()
   document.querySelector('#mycontainer').appendChild(UL)
 }
 

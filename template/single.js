@@ -4,6 +4,8 @@ async function ready() {
   let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
   if (!bareedition)
     return
+
+  showSpinningWheel('#mycontainer','beforeend')
   let data = await getJSON('info')
 
 
@@ -18,6 +20,7 @@ async function ready() {
     LI.appendChild(aElem)
     UL.appendChild(LI)
   }
+  removeSpinningWheel()
   document.querySelector('#mycontainer').appendChild(UL)
 }
 

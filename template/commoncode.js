@@ -151,3 +151,21 @@ window.beginSearch = function () {
 function isObject(obj) {
   return obj === Object(obj);
 }
+
+// Show as loading spinning wheel,only if there isn't any other
+function showSpinningWheel(selector, position) {
+  if (!document.body.contains(document.querySelector('#spinningwheel')) ) {
+    document.querySelector(selector).insertAdjacentHTML(position,`<div  id="spinningwheel">
+    <div class="text-center">
+      <div class="spinner-border m-5" role="status">
+      </div>
+      </div>
+      </div>
+      `)
+  }
+}
+
+function removeSpinningWheel() {
+  if (document.body.contains(document.querySelector('#spinningwheel')) )
+  document.querySelector('#spinningwheel').remove()
+}

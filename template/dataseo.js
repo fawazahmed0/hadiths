@@ -7,6 +7,8 @@ async function ready() {
   let num = params.get("num");
   if (!bareedition || !num)
     return
+
+  showSpinningWheel('#mycontainer','beforeend')
   let editionsJSON = await getJSON('editions')
 
 
@@ -50,7 +52,7 @@ async function ready() {
     count++;
   }
 
-
+removeSpinningWheel()
 
 }
 
