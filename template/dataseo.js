@@ -13,11 +13,11 @@ async function ready() {
 
 
   let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
-  let edtionsLangArr = editionsJSON[bareedition].collection.map(e => [e.name, e.language, e.direction])
+  let edtionsLangArr = editionsJSON[bareedition].collection.map(e => [e.name, e.language, e.direction]).sort((a, b) => a[1].localeCompare(b[1]))
   let linksArr = []
   // Table of content
   let tableElem = getElementFromHTML(tableContainer).querySelector('.table')
-  let uniqueLangs = [...new Set(edtionsLangArr.map(e => e[1]))]
+  let uniqueLangs = [...new Set(edtionsLangArr.map(e => e[1]))].sort()
   for (let lang of uniqueLangs) {
     let aElem = getElement('a', { href: `#${lang.toLowerCase()}` })
     aElem.innerText = lang
