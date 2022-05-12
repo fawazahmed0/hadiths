@@ -120,16 +120,16 @@ function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
   for (let grade of hadith.grades)
     cardElem.querySelector('tbody').insertAdjacentHTML("beforeend", `<tr><td>${capitalize(grade.grade)}</td><td>${grade.name}</td></tr>`);
   let hrefVal = `hadith:${editionName}:${hadith.hadithnumber}`
-  if (hadith.hadithnumber) {
+  if ("hadithnumber" in hadith) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Hadith Number: ${hadith.hadithnumber}</a><br>`);
   }
-  if (hadith.arabicnumber) {
+  if ("arabicnumber" in hadith) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Arabic Number: ${hadith.arabicnumber}</a><br>`);
   }
 
-  if (hadith.reference) {
+  if ("reference" in hadith) {
     cardElem.querySelector('#footercontainer').appendChild(footerDiv.cloneNode())
     Array.from(cardElem.querySelectorAll('.card-footer')).at(-1).insertAdjacentHTML("beforeend", `<a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e => capitalize(e)).join(' ')}</a><br>`);
   }
