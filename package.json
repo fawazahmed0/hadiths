@@ -24,6 +24,8 @@
   "homepage": "https://github.com/fawazahmed0/hadiths#readme",
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.5.0",
+    "@parcel/transformer-jsonld": "^2.5.0",
+    "@parcel/transformer-webmanifest": "^2.5.0",
     "parcel": "^2.5.0"
   },
   "dependencies": {
