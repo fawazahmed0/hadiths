@@ -3,4 +3,3 @@ node_modules/
 dist/
 code/
 template/books/*
-!template/books/index.html

@@ -15,8 +15,21 @@ async function test() {
     let isocodes = await getJSON('isocodes/iso-codes', quranLinks)
     let hadithPath = saveDir
 
+            // create books index i.e list of books available
+            let pathToSave = path.join(hadithPath,`index.html`)
+            let dataToSave = `<ul class="list-group">${Object.entries(editionsJSON).map( e =>`<li class="list-group-item"><a href="${e[0]}">${e[1].name}</a></li>`).join('')}</ul>`
+            addToBigJSON(pathToSave, dataToSave )
+    
+     
 
     for (let [bareedition, value] of Object.entries(editionsJSON)) {
+        let infoJSON = await getJSON('info')
+        // create edition index i.e list of hadiths available
+         pathToSave = path.join(hadithPath,bareedition,`index.html`)
+         let hadithNumArr = Array.from(Array(infoJSON[bareedition].metadata.last_hadithnumber+1).keys())
+         dataToSave = `<ul class="list-group">${hadithNumArr.map(e=>`<li class="list-group-item"><a href="${e}">Hadith Number  ${e}</a></li>`).join('')}</ul>`
+        addToBigJSON(pathToSave, dataToSave )
+ 
         for (let collection of editionsJSON[bareedition].collection.sort((a,b)=>a.language.localeCompare(b.language))) {
 
             let edition = collection.name;
@@ -31,7 +44,7 @@ async function test() {
             let hadiths = data.hadiths
 
             for (let hadith of hadiths) {
-                let pathToSave = path.join(hadithPath,editionsJSON[bareedition].name,`${Math.floor(hadith.hadithnumber)}.html`)
+                let pathToSave = path.join(hadithPath,bareedition,`${Math.floor(hadith.hadithnumber)}.html`)
                 let dataToSave = getHadithCardElem(hadith,edition ,dirval, lang, isocodes)
                 // save language if doesn't exists
                 if(pathToSave in bigJSON === false ||  !bigJSON[pathToSave].includes(languageHeading))
