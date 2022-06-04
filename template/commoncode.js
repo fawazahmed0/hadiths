@@ -42,7 +42,7 @@ window.capitalize = function (words) {
   return words.toString().toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, match => match.toUpperCase()).trim()
 }
 
-window.htmlparser = new DOMParser();
+window.htmlparser = new window.DOMParser();
 
 window.getElement = function (elementName, attributesObj) {
   if (!attributesObj)
@@ -142,7 +142,7 @@ window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes
 }
 
 window.beginSearch = function () {
-  let newparams = new URLSearchParams();
+  let newparams = new window.URLSearchParams();
   let searchquery = document.getElementById('searchquery').value
   newparams.set('q', `site:fawazahmed0.github.io/hadiths ${searchquery}`)
   window.open('https://www.google.com/search?' + newparams.toString(), '_blank');

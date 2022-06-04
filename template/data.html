@@ -2,7 +2,7 @@
     import './commoncode'
     async function ready() {
   document.querySelector('#mycontainer').insertAdjacentHTML('beforeend', searchBar)
-  let params = new URLSearchParams(document.location.search);
+  let params = new window.URLSearchParams(document.location.search);
   let edition = params.get("edition");
   let bareedition = params.get("bareedition") || edition.replace(/\d+/g, '').split('-')[1].trim()
   let type = params.get("type") || 'section'
@@ -12,7 +12,7 @@
   if (!bareedition || (!num && type != 'full'))
     return
 
-  showSpinningWheel('#mycontainer','beforeend')
+  window.showSpinningWheel('#mycontainer','beforeend')
 
   let endpoint
   if (type == 'full')
@@ -39,7 +39,7 @@
   for (let hadith of hadiths)
     document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith, edition, dirval, lang, isocodes))
 
-removeSpinningWheel()
+window.removeSpinningWheel()
 
 }
 
