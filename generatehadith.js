@@ -3,6 +3,7 @@ const path = require('path')
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 let hadithLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/", "https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/"]
+let quranLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/", "https://raw.githubusercontent.com/fawazahmed0/quran-api/1/"]
 let extensions = [".min.json", ".json"]
 let bigJSON = {}
 
@@ -41,7 +42,7 @@ async function test() {
             
 
         }
-        
+   
     }
     
    

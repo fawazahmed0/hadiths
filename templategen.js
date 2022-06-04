@@ -20,11 +20,7 @@ let titles = {'index.html':'Hadiths Books','data.html':'Hadiths with multiple gr
 
 
 //generate titles
-for (let i = 1; i <= CHAPTER_LENGTH; i++) {
-  for (let j = 1; j <= chaplength[i - 1]; j++) {
-    titles[`${i}${path.sep}${j}.html`] = `Chapter ${i} ${arabicChapters[i - 1]} Verse ${j}`
-  }
-}
+
 
 
 let metaheadignore = {}
