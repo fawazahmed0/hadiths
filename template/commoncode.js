@@ -1,4 +1,4 @@
-const htmlHadithContainer =
+window.htmlHadithContainer =
   `    
 <div class="card text-dark bg-light m-3">
 <div class="card-body">
@@ -11,7 +11,7 @@ const htmlHadithContainer =
 </div>
 `
 
-const tableContainer =
+window.tableContainer =
   `
 <table class="table table-hover  table-striped">
   <tbody>
@@ -20,7 +20,7 @@ const tableContainer =
 </table>
 `
 
-const searchBar =
+window.searchBar =
   `
 <div class="mb-3 d-none">
 <form class="d-flex" onsubmit="beginSearch(); return false">
@@ -38,13 +38,13 @@ const searchBar =
 </div>
 `
 
-function capitalize(words) {
+window.capitalize = function (words) {
   return words.toString().toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, match => match.toUpperCase()).trim()
 }
 
-let htmlparser = new DOMParser();
+window.htmlparser = new DOMParser();
 
-function getElement(elementName, attributesObj) {
+window.getElement = function (elementName, attributesObj) {
   if (!attributesObj)
     attributesObj = {}
   let element = document.createElement(elementName);
@@ -54,13 +54,13 @@ function getElement(elementName, attributesObj) {
   return element
 }
 
-let apiLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/", "https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/"]
-let quranLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/", "https://raw.githubusercontent.com/fawazahmed0/quran-api/1/"]
-let extensions = [".min.json", ".json"]
+window.apiLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/", "https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/"]
+window.quranLinks = ["https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/", "https://raw.githubusercontent.com/fawazahmed0/quran-api/1/"]
+window.extensions = [".min.json", ".json"]
 
 // https://www.shawntabrizi.com/code/programmatically-fetch-multiple-apis-parallel-using-async-await-javascript/
 // Get links async i.e in parallel
-async function getJSON(endpoints, links) {
+window.getJSON = async function (endpoints, links) {
   let returnSingle = false
   if (!Array.isArray(endpoints)) {
     endpoints = [endpoints]
@@ -75,7 +75,7 @@ async function getJSON(endpoints, links) {
 }
 
 
-async function fetchWithFallback(links, obj) {
+window.fetchWithFallback = async function (links, obj) {
   let response;
   for (let link of links) {
     try {
@@ -88,17 +88,17 @@ async function fetchWithFallback(links, obj) {
 }
 
 // convert endpoint into multiple urls, including fallback urls
-function getURLs(endpoint, links) {
+window.getURLs = function (endpoint, links) {
   links = links || apiLinks
   return extensions.map(ext => links.map(e => e + endpoint + ext)).flat()
 }
 
-function getElementFromHTML(htmlString) {
+window.getElementFromHTML = function (htmlString) {
   return htmlparser.parseFromString(htmlString, "text/html");
 }
 
 // pass hadith object & get card element with all hadith info in it
-function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
+window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes) {
   let lowerLang = lang.toLowerCase()
   let cardElem = getElementFromHTML(htmlHadithContainer).querySelector('.card')
   cardElem.querySelector('.card-text').innerText = hadith.text
@@ -148,12 +148,12 @@ window.beginSearch = function () {
   window.open('https://www.google.com/search?' + newparams.toString(), '_blank');
 }
 
-function isObject(obj) {
+window.isObject = function (obj) {
   return obj === Object(obj);
 }
 
 // Show as loading spinning wheel,only if there isn't any other
-function showSpinningWheel(selector, position) {
+window.showSpinningWheel = function (selector, position) {
   if (!document.body.contains(document.querySelector('#spinningwheel')) ) {
     document.querySelector(selector).insertAdjacentHTML(position,`<div  id="spinningwheel">
     <div class="text-center">
@@ -165,7 +165,7 @@ function showSpinningWheel(selector, position) {
   }
 }
 
-function removeSpinningWheel() {
+window.removeSpinningWheel = function () {
   if (document.body.contains(document.querySelector('#spinningwheel')) )
   document.querySelector('#spinningwheel').remove()
 }
