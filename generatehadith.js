@@ -86,9 +86,9 @@ function getHadithCardElem(hadith, editionName, dirval, lang, isocodes) {
       </tr>
     </thead>
     <tbody>
-    ${hadith.grades.map(grade=>`<tr><td>${capitalize(grade.grade)}</td><td>${grade.name}</td></tr>`).toString()}
+    ${hadith.grades.map(grade=>`<tr><td>${capitalize(grade.grade)}</td><td>${grade.name}</td></tr>`).join('')}
     </tbody>
-    </table></div` : ''}
+    </table></div>` : ''}
     ${"hadithnumber" in hadith ? `<div class="card-footer"><a href=#${hrefVal} class="link-dark text-decoration-none" >Hadith Number: ${hadith.hadithnumber}</a><br></div>`:``}
     ${"arabicnumber" in hadith ? `<div class="card-footer"><a href=#${hrefVal} class="link-dark text-decoration-none" >Arabic Number: ${hadith.arabicnumber}</a><br></div>` : ''}
     ${"reference" in hadith ? `<div class="card-footer"><a href=#${hrefVal} class="link-dark text-decoration-none" >Reference: ${Object.entries(hadith.reference).flat().map(e => capitalize(e)).join(' ')}</a><br></div>` : ''}
