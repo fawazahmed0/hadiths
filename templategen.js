@@ -15,7 +15,8 @@ let htmlFileNames = allFileNames.filter(e => e.endsWith('.html') && !e.endsWith(
 let defaultTemplate = fs.readFileSync(path.join(templateDir, ignoreHTMLFiles[0])).toString()
 
 
-let titles = {'index.html':'Hadiths Books','data.html':'Hadiths with multiple grades','dataseo.html':'Hadith with multiple grades & multiple languages','sections.html':'Hadith Sections','seo.html':'Hadith Books','single.html':'Single Hadith with multiple grades & multiple languages','404.html' : 'Page not found',`books${path.sep}index.html`:'Hadith Books | Single'}
+let titles = {'index.html':'Hadiths Books','data.html':'Hadiths with multiple grades','dataseo.html':'Hadith with multiple grades & multiple languages','sections.html':'Hadith Sections','seo.html':'Hadith Books','single.html':'Single Hadith with multiple grades & multiple languages','404.html' : 'Page not found'}
+titles[`books${path.sep}index.html`] = 'Hadith Books | Single'
 
 
 async function begin(){
