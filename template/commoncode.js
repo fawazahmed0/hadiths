@@ -22,7 +22,7 @@ window.tableContainer =
 
 window.searchBar =
   `
-<div class="mb-3 d-none">
+<div class="mb-3">
 <form class="d-flex" onsubmit="beginSearch(); return false">
   <input id="searchquery" class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" />
   <button id="searchbtn" class="btn btn-outline-info" type="button" onclick="beginSearch(); return false">
@@ -144,8 +144,8 @@ window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes
 window.beginSearch = function () {
   let newparams = new window.URLSearchParams();
   let searchquery = document.getElementById('searchquery').value
-  newparams.set('q', `site:fawazahmed0.github.io/hadiths ${searchquery}`)
-  window.open('https://www.google.com/search?' + newparams.toString(), '_blank');
+  newparams.set('q', `${searchquery} path:hadiths`)
+  window.open(`https://github.com/fawazahmed0/quran-hadith-search/search?${newparams.toString()}`  , '_blank');
 }
 
 window.isObject = function (obj) {
