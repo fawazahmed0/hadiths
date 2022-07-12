@@ -7,7 +7,7 @@
     "templatebuild": "node templategen.js && watch \"node templategen.js\" ./template",
     "start": "npx rimraf code .parcel-cache && npm-run-all --parallel templatebuild serve",
     "prebuild": "npx rimraf code dist template/books",
-    "build": "node generatehadith.js && node templategen.js && parcel build code/*.html --no-cache --dist-dir dist --public-url ./ && node copydir.js"
+    "build": "node generatehadith.js && node templategen.js && parcel build code/*.html --no-cache --dist-dir dist --public-url ./ && node copydir.js &&  && npx workbox generateSW"
   },
   "browserslist": [
     "defaults"
@@ -26,7 +26,8 @@
     "@parcel/packager-raw-url": "^2.6.0",
     "@parcel/transformer-jsonld": "^2.6.0",
     "@parcel/transformer-webmanifest": "^2.6.0",
-    "parcel": "^2.6.0"
+    "parcel": "^2.6.0",
+    "workbox-cli": "^6.5.3"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.11",
