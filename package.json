@@ -7,7 +7,7 @@
     "templatebuild": "node templategen.js && watch \"node templategen.js\" ./template",
     "start": "npx rimraf code .parcel-cache && npm-run-all --parallel templatebuild serve",
     "prebuild": "npx rimraf code dist template/books",
-    "build": "node generatehadith.js && node templategen.js && node copydir.js && parcel build code/*.html --no-cache --dist-dir dist --public-url ./ && npx workbox generateSW"
+    "build": "node generatehadith.js && node templategen.js && node copydir.js && parcel build code/*.html --no-cache --dist-dir dist --public-url ./"
   },
   "browserslist": [
     "defaults"
