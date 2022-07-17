@@ -18,6 +18,9 @@ let defaultTemplate = fs.readFileSync(path.join(templateDir, ignoreHTMLFiles[0])
 let titles = {'index.html':'Hadiths Books','data.html':'Hadiths with multiple grades','dataseo.html':'Hadith with multiple grades & multiple languages','sections.html':'Hadith Sections','seo.html':'Hadith Books','single.html':'Single Hadith with multiple grades & multiple languages','404.html' : 'Page not found'}
 titles[`books${path.sep}index.html`] = 'Hadith Books | Single'
 
+let relativeURL = {}
+relativeURL[`books${path.sep}index.html`] = '../'
+
 
 async function begin(){
 
@@ -30,14 +33,17 @@ for(let [key,value] of mappedTitles){
  let entriesArr =  Array.from(Array(infoJSON[key].metadata.last_hadithnumber+1000).keys()).map(e=>[`${key}${path.sep}${e}.html`,`${value} ${e}`])
  entriesArr.push([`${key}${path.sep}index.html`,value])
  Object.assign(titles, Object.fromEntries(entriesArr))
+ Object.assign(relativeURL, Object.fromEntries(entriesArr.map(([k,v])=>[k, '../../'])))
 }
 
 
 let titleKeys = Object.keys(titles).reverse()
 for (let name of htmlFileNames){
     let innercode = fs.readFileSync(name).toString()
-    let titleVal = titles[titleKeys.find(e=>name.endsWith(e))]
-    var rendered = Mustache.render(defaultTemplate, { title: titleVal || path.parse(name).name , containercode:innercode, meta:{filename:name.replace(templateDir,"").replaceAll(path.sep,'/')} });
+    let titleKey = titleKeys.find(e=>name.endsWith(e))
+    let titleVal = titles[titleKey]
+    let relativeVal = relativeURL[titleKey]
+    var rendered = Mustache.render(defaultTemplate, { title: titleVal || path.parse(name).name , relative:relativeVal, containercode:innercode, meta:{filename:name.replace(templateDir,"").replaceAll(path.sep,'/')} });
     fs.outputFileSync(name.replace(templateDir,codeDir), rendered)
 }
 
