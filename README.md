@@ -1,7 +1,7 @@
 <h1 align="center">Hadiths</h1>
 
 <p align="center">
-  <img width="460" height="300" src="https://raw.githubusercontent.com/fawazahmed0/hadiths/main/template/icons/512x512.png">
+  <img width="460" height="300" src="https://raw.githubusercontent.com/fawazahmed0/hadiths/main/image.png">
 </p>
 
 
