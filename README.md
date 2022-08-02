@@ -39,13 +39,9 @@ https://fawazahmed0.github.io/hadiths/data.html?edition=eng-ibnmajah&type=full&g
 #### How it works:
 The website uses [Free Hadith API](https://github.com/fawazahmed0/hadith-api) to show the data
 
+---
 #### Share:
 Please Share this with your family & friends and Star this repo by clicking on [:star: button](#) above [:arrow_upper_right:](#):<br>
-
-### References:
-All the open source projects and dawah/Islamic organizations
-
-Please see [References](https://github.com/fawazahmed0/hadith-api/blob/1/References.md "References")
 
 
 <br>
