@@ -39,7 +39,8 @@ for (let hadith of hadiths)
 document.querySelector('#mycontainer').appendChild(getHadithCardElem(hadith, edition, dirval, lang, isocodes))
 
 window.removeSpinningWheel()
-
+// scroll to hash Text fragment
+window.location = window.getHashTextFragment()
 }
 
 

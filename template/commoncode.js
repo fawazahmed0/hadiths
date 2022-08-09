@@ -169,3 +169,13 @@ window.removeSpinningWheel = function () {
   if (document.body.contains(document.querySelector('#spinningwheel')) )
   document.querySelector('#spinningwheel').remove()
 }
+
+// Get Hash with Text Fragment
+window.getHashTextFragment = function () {
+  let hashWithFragment = window.location.hash
+  // https://web.dev/text-fragments/#obtaining-text-fragments-for-analytics-purposes
+  try{
+    hashWithFragment =  new URL(performance.getEntries().find(({ type }) => type === 'navigate').name).hash
+  }catch(e){}
+  return hashWithFragment
+}
