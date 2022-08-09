@@ -22,6 +22,10 @@ UL.appendChild(LI)
 }
 window.removeSpinningWheel()
 document.querySelector('#mycontainer').appendChild(UL)
+
+// scroll to hash Text fragment
+window.location = window.getHashTextFragment()
+
 }
 
 
