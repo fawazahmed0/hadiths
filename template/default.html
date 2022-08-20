@@ -52,6 +52,14 @@
         // Register Service worker for Add to Home Screen option to work
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register(new URL('{{{relative}}}service-worker.js', import.meta.url)) }
     </script>
+    
+<script type="module">
+  if (!('fragmentDirective' in Location.prototype) &&
+      !('fragmentDirective' in document)) {
+      let src = 'https://unpkg.com/text-fragments-polyfill'
+    import(src)
+      }
+</script>
  
     <link rel="icon" type="image/svg+xml" href="{{{relative}}}icons/original-icon.svg">
     <link rel="manifest" href="{{{relative}}}manifest.webmanifest" />
