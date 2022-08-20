@@ -53,7 +53,7 @@
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register(new URL('{{{relative}}}service-worker.js', import.meta.url)) }
     </script>
     
-    <script type="module">
+    <script>
      if (!('fragmentDirective' in Location.prototype) && !('fragmentDirective' in document)) 
           import('../node_modules/text-fragments-polyfill/dist/text-fragments.js')
     </script>
