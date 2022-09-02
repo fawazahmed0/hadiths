@@ -1,5 +1,5 @@
 
-import './commoncode'
+import './commoncode.js'
 async function ready() {
 
     window.showSpinningWheel('#mycontainer','beforeend')
