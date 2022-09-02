@@ -1,4 +1,4 @@
-import './commoncode'
+import './commoncode.js'
 async function ready() {
 let params = new window.URLSearchParams(document.location.search);
 let edition = params.get("edition");
