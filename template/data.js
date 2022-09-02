@@ -1,4 +1,4 @@
-import './commoncode'
+import './commoncode.js'
 async function ready() {
 document.querySelector('#mycontainer').insertAdjacentHTML('beforeend', searchBar)
 let params = new window.URLSearchParams(document.location.search);
