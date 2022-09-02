@@ -172,10 +172,10 @@ window.removeSpinningWheel = function () {
 
 // Hash with Text Fragment
 window.getHashTextFragment = function () {
-  let hashWithFragment = window.location.hash
+  let hashWithFragment;
   // https://web.dev/text-fragments/#obtaining-text-fragments-for-analytics-purposes
   try{
     hashWithFragment =  new URL(performance.getEntries().find(({ type }) => type === 'navigate').name).hash
   }catch(e){}
-  return hashWithFragment
+  return hashWithFragment || window.location.hash
 }
