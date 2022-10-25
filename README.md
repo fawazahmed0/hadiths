@@ -5,7 +5,7 @@
 </p>
 
 
-**In the name of God, who have guided me to do this work**
+**In the name of God, who has guided me to do this work**
 
 Hadith in multiple languages and multiple grades available at:<br> [fawazahmed0.github.io/hadiths](https://fawazahmed0.github.io/hadiths)
 
