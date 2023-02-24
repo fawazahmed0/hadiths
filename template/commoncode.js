@@ -144,7 +144,7 @@ window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes
 window.beginSearch = function () {
   let newparams = new window.URLSearchParams();
   let searchquery = document.getElementById('searchquery').value
-  newparams.set('q', `${searchquery} path:Hadiths`)
+  newparams.set('q', `${searchquery}`)
   window.open(`https://github.com/fawazahmed0/quran-hadith-search/search?${newparams.toString()}`  , '_blank');
 }
 
