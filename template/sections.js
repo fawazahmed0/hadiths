@@ -20,9 +20,9 @@ let sectionDetails = data[bareedition]['metadata']['section_details'][key]
   
 let aElem = getElement('a', { href: `data.html?${newparams.toString()}` })
 aElem.innerText = `Section ${key} : ${value}`
-let spanElem = getElement('span', { class: 'float-end' })
+let spanElem = getElement('span', { class: 'float-end text-dark' })
 if(key!="0")
-spanElem.innerText = /muslim/i.test(bareedition) ? `${sectionDetails.arabicnumber_first} to ${sectionDetails.arabicnumber_last}` : `${sectionDetails.hadithnumber_first} to ${sectionDetails.hadithnumber_last}`
+spanElem.innerText = /muslim/i.test(bareedition) ? `${Math.floor(sectionDetails.arabicnumber_first)} to ${Math.floor(sectionDetails.arabicnumber_last)}` : `${Math.floor(sectionDetails.hadithnumber_first)} to ${Math.floor(sectionDetails.hadithnumber_last)}`
 aElem.appendChild(spanElem)
 LI.appendChild(aElem)
 UL.appendChild(LI)
