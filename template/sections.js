@@ -15,9 +15,13 @@ let newparams = new window.URLSearchParams();
 newparams.set('edition', edition)
 newparams.set('type', 'section')
 newparams.set('num', key)
+
+let sectionDetails = data[bareedition]['metadata']['section_details'][key]  
+  
 let aElem = getElement('a', { href: `data.html?${newparams.toString()}` })
 aElem.innerText = `Section ${key} : ${value}`
 let spanElem = getElement('span', { class: 'float-end' })
+if(key!="0")
 spanElem.innerText = /muslim/i.test(bareedition) ? `${sectionDetails.arabicnumber_first} to ${sectionDetails.arabicnumber_last}` : `${sectionDetails.hadithnumber_first} to ${sectionDetails.hadithnumber_last}`
 aElem.appendChild(spanElem)
 LI.appendChild(aElem)
