@@ -1,8 +1,8 @@
 window.htmlHadithContainer =
   `    
-<div class="card text-dark bg-light m-3">
+<div class="card text-dark m-3">
 <div class="card-body">
-<div class="card-text lead m-1"></div>
+<div class="card-text m-1"></div>
 </div>
 
 <span id="footercontainer">
