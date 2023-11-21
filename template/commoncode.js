@@ -142,10 +142,10 @@ window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes
 }
 
 window.beginSearch = function () {
-  let newparams = new window.URLSearchParams();
-  let searchquery = document.getElementById('searchquery').value
-  newparams.set('q', `${searchquery}`)
-  window.open(`https://github.com/fawazahmed0/quran-hadith-search/search?${newparams.toString()}`  , '_blank');
+            let newparams = new window.URLSearchParams();
+            let searchquery = document.getElementById('searchquery').value
+            newparams.set('q', `repo:fawazahmed0/quran-hadith-search path:/^Hadiths\\// ${searchquery.trim()}`)
+            window.open(`https://github.com/search?${newparams.toString()}&type=code`)
 }
 
 window.isObject = function (obj) {
