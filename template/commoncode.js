@@ -35,6 +35,8 @@ window.searchBar =
     </svg>
   </button>
 </form>
+<div id="search-results" class="mt-3"></div>
+<hr id="search-divider" class="d-none" />
 </div>
 `
 
@@ -141,12 +143,60 @@ window.getHadithCardElem = function (hadith, editionName, dirval, lang, isocodes
   return cardElem
 }
 
-window.beginSearch = function () {
-            let newparams = new window.URLSearchParams();
-            let searchquery = document.getElementById('searchquery').value
-            newparams.set('q', `repo:fawazahmed0/quran-hadith-search path:/^Hadiths\\// ${searchquery.trim()}`)
-            window.open(`https://github.com/search?${newparams.toString()}&type=code`)
-}
+const fuseScript = document.createElement('script');
+fuseScript.src = 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js';
+document.head.appendChild(fuseScript);
+
+let cachedEdition = null;
+let cachedHadiths = null;
+
+window.beginSearch = async function () {
+  const query = document.getElementById('searchquery').value.trim();
+  if (!query) return;
+  const resultsEl = document.getElementById('search-results');
+  const divider = document.getElementById('search-divider');
+  resultsEl.innerHTML = '<p class="text-muted">Searching...</p>';
+  const params = new URLSearchParams(window.location.search);
+  const edition = params.get('edition');
+  try {
+      if (edition !== cachedEdition || !cachedHadiths) {
+          resultsEl.innerHTML = '<p class="text-muted">Loading hadith data...</p>';
+          const res = await fetch(
+              `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${edition}.json`
+          );
+          const data = await res.json();
+          cachedHadiths = data.hadiths;
+          cachedEdition = edition;
+      }
+      const fuse = new Fuse(cachedHadiths, {
+          keys: ['text'],
+          threshold: 0.3,
+          minMatchCharLength: 3,
+          includeScore: true,
+      });
+      const results = fuse.search(query).slice(0, 20);
+      if (results.length === 0) {
+          resultsEl.innerHTML = '<p class="text-muted">No results found.</p>';
+          divider.classList.add('d-none');
+          return;
+      }
+      resultsEl.innerHTML = results.map(({ item }) => `
+          <div class="card mb-2">
+              <div class="card-body">
+                  <h6 class="card-subtitle mb-2 text-muted">Hadith #${item.hadithnumber}</h6>
+                  <p class="card-text">${item.text}</p>
+                  <a href="data.html?edition=${edition}&type=single&num=${item.hadithnumber}" 
+                     class="card-link">View full hadith →</a>
+              </div>
+          </div>
+      `).join('');
+      divider.classList.remove('d-none');
+  } catch (err) {
+      resultsEl.innerHTML = '<p class="text-danger">Failed to load hadith data. Please try again.</p>';
+      divider.classList.add('d-none');
+      console.error(err);
+  }
+};
 
 window.isObject = function (obj) {
   return obj === Object(obj);
