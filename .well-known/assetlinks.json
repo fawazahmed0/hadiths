@@ -1,0 +1,7 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "ua.pp.sendletters.twa",
+                     "sha256_cert_fingerprints": ["03:72:4B:D2:66:9D:20:4A:7A:5C:86:6E:A6:46:72:8F:56:DB:50:D4:DD:45:8E:49:1D:D0:18:15:46:10:48:ED",
+                                                  "EB:A4:66:F5:93:E1:B4:08:88:85:14:4C:22:2A:12:99:6D:36:13:DE:22:4E:F5:E6:EA:BF:57:63:08:9A:C1:15"] }
+      }
+]
